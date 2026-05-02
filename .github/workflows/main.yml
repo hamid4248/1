@@ -1,0 +1,19 @@
+name: Direct_Download
+on: workflow_dispatch # یعنی فقط وقتی خودم دکمه را زدم اجرا شو
+
+jobs:
+  download_job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3 # ورود به پوشه مخزن شما
+      
+      - name: Fetching File
+        run: wget https://cas-bridge.xethub.hf.co/xet-bridge-us/660e45934a2ced4b3344dbf2/aa55ac20ada56c700cd4dd8ba2d48ac24a2547d7cb01751e21d93a2d21c81e0a?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=cas%2F20260502%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260502T135837Z&X-Amz-Expires=3600&X-Amz-Signature=a7805d0b59f3515f95698efc6e602f7add80839c0d12277654e9c9e838a40a61&X-Amz-SignedHeaders=host&X-Xet-Cas-Uid=public&response-content-disposition=inline%3B+filename*%3DUTF-8%27%27dolphin-2.8-mistral-7b-v02.Q5_K_M.gguf%3B+filename%3D%22dolphin-2.8-mistral-7b-v02.Q5_K_M.gguf%22%3B&x-amz-checksum-mode=ENABLED&x-id=GetObject&Expires=1777733917&Policy=eyJTdGF0ZW1lbnQiOlt7IkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc3NzczMzkxN319LCJSZXNvdXJjZSI6Imh0dHBzOi8vY2FzLWJyaWRnZS54ZXRodWIuaGYuY28veGV0LWJyaWRnZS11cy82NjBlNDU5MzRhMmNlZDRiMzM0NGRiZjIvYWE1NWFjMjBhZGE1NmM3MDBjZDRkZDhiYTJkNDhhYzI0YTI1NDdkN2NiMDE3NTFlMjFkOTNhMmQyMWM4MWUwYSoifV19&Signature=En9KL4ECI2eFab87itSSxoBmzRPkuvZNw9lMPqBfCiammzNVRsCNc3Prp7KdsyYpAXlmG1jpcIw4tn6CLRGcrRm2HxUuNN6NPR3SOE%7E4ZEzbpAGfy9tloqto30ohJ43KIXXcAMaDlL7txgdD5yT0RCyDHpjuto6EPMmDuuOimU58tK4jsOV8o6l18-0H67jckrIp5ieWMtl7l0eVJ4OgX8N0f8PnByKhTcFY%7ENdO0KXLPwBSueNsR7XeuUjyVK0p5pvhWTAWj1wsWgiFmC3sq4o6MEWeKxbCRtKBX0OAYFcD1cQPq9Gyf6v8wf4SMmUul%7EyjuFr1hNN923qANKDvww__&Key-Pair-Id=K2L8F4GPSG1IFC
+        
+      - name: Save to GitHub
+        run: |
+          git config --global user.name "Bot"
+          git config --global user.email "bot@github.com"
+          git add .
+          git commit -m "File added from server"
+          git push
